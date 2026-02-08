@@ -1,0 +1,175 @@
+.incident-timeline {
+    margin-top: 32px;
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.incident-timeline h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.25rem;
+    color: #2d3748;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 12px;
+}
+
+.timeline-list {
+    position: relative;
+    padding-left: 20px;
+}
+
+/* Vertical line connecting items */
+.timeline-list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 29px;
+    /* Adjust based on icon width */
+    width: 2px;
+    background: #e2e8f0;
+    z-index: 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-icon {
+    width: 20px;
+    height: 20px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    padding: 10px;
+    /* Makes the effective circle larger to cover the line */
+}
+
+.timeline-content {
+    flex: 1;
+    background: #f7fafc;
+    padding: 12px 16px;
+    border-radius: 6px;
+    border-left: 4px solid #cbd5e0;
+}
+
+.type-status_change .timeline-content {
+    border-left-color: #4299e1;
+    background: #ebf8ff;
+}
+
+.type-comment .timeline-content {
+    border-left-color: #ecc94b;
+    background: #fffff0;
+}
+
+.type-event .timeline-content {
+    border-left-color: #a0aec0;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.875rem;
+}
+
+.timeline-author {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.timeline-date {
+    color: #718096;
+}
+
+.status-change-badge {
+    display: inline-block;
+    background: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2b6cb0;
+    border: 1px solid #bee3f8;
+    margin-bottom: 6px;
+}
+
+.timeline-note {
+    margin: 0;
+    color: #4a5568;
+    line-height: 1.5;
+}
+
+.timeline-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+}
+
+.incident-timeline h3 {
+    margin: 0;
+    border: none;
+    padding: 0;
+}
+
+.comment-form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.comment-input:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+.comment-btn {
+    padding: 8px 16px;
+    background: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.comment-btn:hover {
+    background: #2b6cb0;
+}
+
+.comment-btn:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+}
+
+.timeline-empty {
+    color: #718096;
+    font-style: italic;
+    text-align: center;
+    padding: 24px;
+}

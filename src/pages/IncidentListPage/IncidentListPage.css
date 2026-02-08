@@ -79,7 +79,6 @@
     border-radius: 4px;
     cursor: pointer;
     height: 38px;
-    /* match select height */
 }
 
 .clear-filters-btn:hover {
@@ -153,7 +152,6 @@
     color: #212529;
 }
 
-/* States */
 .loading-screen,
 .error-screen,
 .empty-state {

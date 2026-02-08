@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useIncidents } from '../../context/IncidentContext';
+import { useIncidents } from '../../hooks/useIncidents';
 import type { Severity, Status, Service } from '../../types/common';
 import { sortIncidents, filterIncidents } from '../../utils/incidentUtils';
 import IncidentFilters from './components/IncidentFilters';

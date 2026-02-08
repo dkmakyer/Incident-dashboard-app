@@ -1,15 +1,6 @@
 import React from 'react';
-import type { Severity, Status, Service } from '../../../types/common';
+import type { IncidentFiltersProps } from '../../../interfaces/Incident';
 
-interface IncidentFiltersProps {
-    filters: {
-        status: Status | '';
-        severity: Severity | '';
-        service: Service | '';
-    };
-    onFilterChange: (key: 'status' | 'severity' | 'service', value: string) => void;
-    onClearFilters: () => void;
-}
 
 const IncidentFilters: React.FC<IncidentFiltersProps> = ({ filters, onFilterChange, onClearFilters }) => {
     return (

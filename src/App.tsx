@@ -1,6 +1,6 @@
 import './App.css'
 import Layout from './component/Layout/Layout'
-import { IncidentProvider } from './context/IncidentContext'
+import { IncidentProvider } from './context/IncidentProvider'
 import IncidentListPage from './pages/IncidentListPage/IncidentListPage'
 import IncidentDetailPage from './pages/IncidentDetailPage/IncidentDetailPage'
 

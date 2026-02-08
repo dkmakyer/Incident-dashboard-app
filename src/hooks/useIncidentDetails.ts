@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useIncidents } from '../context/IncidentContext';
+import { useIncidents } from './useIncidents';
 import type { Incident } from '../interfaces/Incident';
 import type { Status } from '../types/common';
 import { VALID_TRANSITIONS } from '../constants/incidentConstants';
