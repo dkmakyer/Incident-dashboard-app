@@ -7,14 +7,11 @@ import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useIncidentSimulation } from '../hooks/useIncidentSimulation';
 
 export const IncidentProvider = ({ children }: { children: ReactNode }) => {
-    // Persistence: Use local storage for incidents
     const [incidents, setIncidents] = useLocalStorage<Incident[]>('incident-dashboard-data', []);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
-    // Initial Load Logic
     useEffect(() => {
-        // Check if we already have data in storage
         if (incidents.length > 0) {
             setLoading(false);
             return;
@@ -32,19 +29,16 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
         }, 1500);
 
         return () => clearTimeout(timer);
-    }, []); // Only run once on mount
+    }, []);
 
-    // Decoupled Simulation Logic
     useIncidentSimulation(incidents, setIncidents, !loading);
 
     const refreshIncidents = () => {
         setLoading(true);
         setError(null);
-        // We might want to keep current data while "refreshing" or clear it.
-        // For a refresh, let's clear and re-fetch (re-initialize)
+
         setIncidents([]);
 
-        // Re-run initial load logic simulation
         setTimeout(() => {
             setIncidents(INITIAL_INCIDENTS);
             setLoading(false);
@@ -73,7 +67,7 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
                     incidentId: id,
                     timestamp,
                     type: 'status_change',
-                    author: 'User', // Hardcoded for now
+                    author: 'User',
                     note,
                     previousStatus: incident.status,
                     newStatus
@@ -104,7 +98,7 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
 
                 return {
                     ...incident,
-                    updatedAt: Date.now(), // Comments update the incident 'last activity'
+                    updatedAt: Date.now(),
                     timeline: [...incident.timeline, newEntry]
                 };
             }

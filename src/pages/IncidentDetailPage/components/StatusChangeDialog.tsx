@@ -36,6 +36,7 @@ const StatusChangeDialog: React.FC<StatusChangeDialogProps> = ({ isOpen, onClose
                         onChange={(e) => setNote(e.target.value)}
                         placeholder="Please explain why the status is changing..."
                         rows={3}
+                        style={{ width: "30rem" }}
                     />
                 </div>
 

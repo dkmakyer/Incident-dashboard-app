@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './IncidentTimeline.css'; // Reusing existing styles for consistency
+import './IncidentTimeline.css';
 
 interface IncidentCommentFormProps {
     onSubmit: (comment: string) => void;

@@ -5,11 +5,9 @@ import { SEVERITY_ORDER } from '../constants/incidentConstants';
 
 export const sortIncidents = (incidents: Incident[]): Incident[] => {
     return [...incidents].sort((a, b) => {
-        // 1. Sort by Severity (Ascending order of importance: Critical -> Low)
         const severityDiff = SEVERITY_ORDER[a.severity] - SEVERITY_ORDER[b.severity];
         if (severityDiff !== 0) return severityDiff;
 
-        // 2. Sort by Recency (Newest first)
         return b.createdAt - a.createdAt;
     });
 };

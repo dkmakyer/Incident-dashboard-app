@@ -14,7 +14,7 @@ export const generateMockIncident = (): Incident => {
         title: `Incident regarding ${service}`,
         description: 'Automated alert triggered due to high latency or error rates.',
         severity: getRandomElement(SEVERITIES),
-        status: 'Open', // New incidents usually start as Open
+        status: 'Open',
         service,
         createdAt,
         timeline: [
@@ -72,7 +72,7 @@ export const INITIAL_INCIDENTS: Incident[] = [
                 incidentId: '2',
                 timestamp: Date.now() - 1000 * 60 * 15,
                 type: 'status_change',
-                author: 'System', // Simulated auto-assignment
+                author: 'System',
                 note: 'Status changed from Open to In Progress',
                 previousStatus: 'Open',
                 newStatus: 'In Progress'

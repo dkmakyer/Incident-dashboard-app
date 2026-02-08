@@ -17,6 +17,12 @@
     margin-bottom: 1.5rem;
 }
 
+.incident-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .back-btn:hover {
     text-decoration: underline;
 }
@@ -73,6 +79,12 @@
     font-weight: 600;
 }
 
+.meta-item {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
 .meta-info {
     display: flex;
     gap: 2rem;
@@ -101,6 +113,20 @@
 .status-actions {
     display: flex;
     gap: 1rem;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+button {
+    min-width: 9rem;
+    height: 2rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
 }
 
 .status-btn {
