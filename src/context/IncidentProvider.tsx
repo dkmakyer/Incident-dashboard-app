@@ -2,22 +2,27 @@ import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import type { Incident, TimelineEntry } from '../interfaces/Incident';
 import { IncidentContext } from './IncidentContext';
-import { generateMockIncident, INITIAL_INCIDENTS, generateId } from '../utils/mockIncidentUtils';
+import { INITIAL_INCIDENTS, generateId } from '../utils/mockIncidentUtils';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+import { useIncidentSimulation } from '../hooks/useIncidentSimulation';
 
 export const IncidentProvider = ({ children }: { children: ReactNode }) => {
-    const [incidents, setIncidents] = useState<Incident[]>([]);
+    // Persistence: Use local storage for incidents
+    const [incidents, setIncidents] = useLocalStorage<Incident[]>('incident-dashboard-data', []);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
-    // Initial Load Simulation
+    // Initial Load Logic
     useEffect(() => {
+        // Check if we already have data in storage
+        if (incidents.length > 0) {
+            setLoading(false);
+            return;
+        }
+
+        // Simulate API fetch if storage is empty
         const timer = setTimeout(() => {
             try {
-                // --- MANUAL ERROR TRIGGER ---
-                // Comment out the next line to return to normal behavior
-                // throw new Error("Simulated API Error: Failed to fetch incidents.");
-                // -----------------------------
-
                 setIncidents(INITIAL_INCIDENTS);
                 setLoading(false);
             } catch (err) {
@@ -27,58 +32,19 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
         }, 1500);
 
         return () => clearTimeout(timer);
-    }, []);
+    }, []); // Only run once on mount
 
-    // Live Update Simulation (New incident every 10-20 seconds)
-    useEffect(() => {
-        if (loading) return;
-
-        const interval = setInterval(() => {
-            setIncidents(prev => {
-                const shouldAddIncident = Math.random() > 0.8;
-                const shouldAddEvent = Math.random() > 0.6;
-
-                let newIncidents = [...prev];
-
-                // 1. New Incident
-                if (shouldAddIncident) {
-                    newIncidents = [generateMockIncident(), ...newIncidents];
-                }
-
-                // 2. Random Event on existing incident
-                if (shouldAddEvent && newIncidents.length > 0) {
-                    const randomIndex = Math.floor(Math.random() * newIncidents.length);
-                    const incident = newIncidents[randomIndex];
-                    // Only add event if not resolved (optional rule)
-                    if (incident.status !== 'Resolved') {
-                        const newEvent: TimelineEntry = {
-                            id: generateId(),
-                            incidentId: incident.id,
-                            timestamp: Date.now(),
-                            type: 'event',
-                            author: 'System',
-                            note: 'Automated health check completed. Metrics stable.'
-                        };
-
-                        newIncidents[randomIndex] = {
-                            ...incident,
-                            timeline: [...incident.timeline, newEvent]
-                        };
-                    }
-                }
-
-                return newIncidents;
-            });
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, [loading]);
+    // Decoupled Simulation Logic
+    useIncidentSimulation(incidents, setIncidents, !loading);
 
     const refreshIncidents = () => {
         setLoading(true);
         setError(null);
-        setIncidents([]); // Clear current list
-        // Re-run initial load logic
+        // We might want to keep current data while "refreshing" or clear it.
+        // For a refresh, let's clear and re-fetch (re-initialize)
+        setIncidents([]);
+
+        // Re-run initial load logic simulation
         setTimeout(() => {
             setIncidents(INITIAL_INCIDENTS);
             setLoading(false);
@@ -86,7 +52,7 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const updateIncident = (id: string, updates: Partial<Incident>) => {
-        setIncidents(prevIncidents => prevIncidents.map(incident => {
+        setIncidents((prevIncidents: Incident[]) => prevIncidents.map((incident: Incident) => {
             if (incident.id === id) {
                 return {
                     ...incident,
@@ -99,7 +65,7 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const changeIncidentStatus = (id: string, newStatus: string, note: string) => {
-        setIncidents(prevIncidents => prevIncidents.map(incident => {
+        setIncidents((prevIncidents: Incident[]) => prevIncidents.map((incident: Incident) => {
             if (incident.id === id) {
                 const timestamp = Date.now();
                 const newEntry: TimelineEntry = {
@@ -107,7 +73,7 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
                     incidentId: id,
                     timestamp,
                     type: 'status_change',
-                    author: 'User', // Hardcoded for now, would come from auth context
+                    author: 'User', // Hardcoded for now
                     note,
                     previousStatus: incident.status,
                     newStatus
@@ -115,7 +81,7 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
 
                 return {
                     ...incident,
-                    status: newStatus as any, // Cast to any to avoid strict union issues if string passed
+                    status: newStatus as any,
                     updatedAt: timestamp,
                     timeline: [...incident.timeline, newEntry]
                 };
@@ -125,7 +91,7 @@ export const IncidentProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const addComment = (id: string, comment: string) => {
-        setIncidents(prevIncidents => prevIncidents.map(incident => {
+        setIncidents((prevIncidents: Incident[]) => prevIncidents.map((incident: Incident) => {
             if (incident.id === id) {
                 const newEntry: TimelineEntry = {
                     id: generateId(),

@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { useIncidentDetails } from '../../hooks/useIncidentDetails';
-import { useIncidents } from '../../hooks/useIncidents';
 import StatusChangeDialog from './components/StatusChangeDialog';
 import IncidentTimeline from './components/IncidentTimeline';
+import IncidentCommentForm from './components/IncidentCommentForm';
 import type { Status } from '../../types/common';
 import { VALID_TRANSITIONS } from '../../constants/incidentConstants';
 import './IncidentDetailPage.css';
 
 const IncidentDetailPage: React.FC = () => {
-    const { incident, loading, error, goBack } = useIncidentDetails();
-    const { changeIncidentStatus, addComment } = useIncidents();
+    const {
+        incident,
+        loading,
+        error,
+        goBack,
+        changeIncidentStatus,
+        addComment
+    } = useIncidentDetails();
 
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [pendingStatus, setPendingStatus] = useState<Status | null>(null);
@@ -101,10 +107,11 @@ const IncidentDetailPage: React.FC = () => {
                 </div>
             </div>
 
-            <IncidentTimeline
-                entries={incident.timeline}
-                onAddComment={handleAddComment}
-            />
+            <div className="timeline-section">
+                <h3>Activity Timeline</h3>
+                <IncidentCommentForm onSubmit={handleAddComment} />
+                <IncidentTimeline entries={incident.timeline} />
+            </div>
 
             <StatusChangeDialog
                 isOpen={isDialogOpen}

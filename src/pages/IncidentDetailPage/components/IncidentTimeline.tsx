@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 import type { TimelineEntry } from '../../../interfaces/Incident';
 import './IncidentTimeline.css';
 
 interface IncidentTimelineProps {
     entries: TimelineEntry[];
-    onAddComment?: (comment: string) => void;
 }
 
-const IncidentTimeline: React.FC<IncidentTimelineProps> = ({ entries, onAddComment }) => {
-    const [comment, setComment] = useState('');
-
+const IncidentTimeline: React.FC<IncidentTimelineProps> = ({ entries }) => {
     // Sort entries by timestamp descending (newest first)
-    const sortedEntries = [...entries].sort((a, b) => b.timestamp - a.timestamp);
+    const sortedEntries = useMemo(
+        () => [...entries].sort((a, b) => b.timestamp - a.timestamp),
+        [entries]
+    );
 
     const formatDate = (timestamp: number) => {
         return new Date(timestamp).toLocaleString();
@@ -26,35 +26,8 @@ const IncidentTimeline: React.FC<IncidentTimelineProps> = ({ entries, onAddComme
         }
     };
 
-    const handleSubmitComment = (e: React.SubmitEvent) => {
-        e.preventDefault();
-        if (comment.trim() && onAddComment) {
-            onAddComment(comment);
-            setComment('');
-        }
-    };
-
     return (
         <div className="incident-timeline">
-            <div className="timeline-header-section">
-                <h3>Activity Timeline</h3>
-            </div>
-
-            {onAddComment && (
-                <form onSubmit={handleSubmitComment} className="comment-form">
-                    <input
-                        type="text"
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
-                        placeholder="Add a comment..."
-                        className="comment-input"
-                    />
-                    <button type="submit" disabled={!comment.trim()} className="comment-btn">
-                        Post
-                    </button>
-                </form>
-            )}
-
             <div className="timeline-list">
                 {entries.length === 0 ? (
                     <div className="timeline-empty">No activity recorded yet.</div>
