@@ -16,13 +16,11 @@ const Dashboard = () => {
 
     const { incidents } = context;
 
-    // Calculate Analytics
     const totalIncidents = incidents.length;
     const openIncidents = incidents.filter(i => i.status === 'Open').length;
     const inProgressIncidents = incidents.filter(i => i.status === 'In Progress').length;
     const resolvedIncidents = incidents.filter(i => i.status === 'Resolved').length;
 
-    // Chart Data
     const statusData = [
         { name: 'Open', value: openIncidents },
         { name: 'In Progress', value: inProgressIncidents },
