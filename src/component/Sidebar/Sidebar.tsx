@@ -5,7 +5,7 @@ import {
     BarChart3,
     CheckSquare,
     Settings,
-    LogOut,
+    Shield
 } from "lucide-react";
 
 import "./Sidebar.css";
@@ -14,7 +14,8 @@ const Sidebar = () => {
     return (
         <aside className="sidebar">
             <div className="sidebar-header">
-                <h1>IncidentOps</h1>
+                <Shield size={28} className="brand-icon" />
+                <h1 className="sidebar-title">IncidentOps</h1>
             </div>
 
             <nav className="sidebar-menu">
@@ -47,10 +48,6 @@ const Sidebar = () => {
                     label="Settings"
                     Icon={Settings}
                 />
-                <button className="logout-btn">
-                    <LogOut size={20} />
-                    <span>Logout</span>
-                </button>
             </nav>
         </aside>
     );

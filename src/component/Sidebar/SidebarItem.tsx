@@ -16,7 +16,7 @@ const SidebarItem = ({ to, label, Icon }: SidebarItemProps) => {
             }
         >
             <Icon size={20} strokeWidth={1.8} />
-            <span>{label}</span>
+            <span className="sidebar-label">{label}</span>
         </NavLink>
     );
 };

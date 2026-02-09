@@ -17,7 +17,9 @@
     font-size: 1.2rem;
 }
 
-
+.sidebar-title {
+    font-size: 1.5rem;
+}
 
 .sidebar-menu {
     flex: 1;
@@ -45,14 +47,36 @@
 }
 
 
-.logout-btn {
-    padding: 1.3rem;
-    width: 100%;
-    background: none;
-    border: none;
-    color: #f87171;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
+.brand-icon {
+    color: #60a5fa;
+    flex-shrink: 0;
+}
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .sidebar-header {
+        justify-content: center;
+        padding: 1rem;
+    }
+
+    .sidebar-title {
+        display: none;
+    }
+
+    .sidebar-label {
+        display: none;
+    }
+
+    .logout-btn span {
+        display: none;
+    }
+
+    .sidebar-item {
+        justify-content: center;
+        padding: 12px;
+    }
 }
