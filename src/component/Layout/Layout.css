@@ -13,6 +13,7 @@
 
 .sidebar-nav {
     position: fixed;
+    min-height: 100vh;
     left: 0;
     top: 0;
     bottom: 0;
@@ -30,7 +31,6 @@
     left: 15rem;
     position: absolute;
     right: 0;
-    background-color: #f8f9fa;
 }
 
 .app-footer {

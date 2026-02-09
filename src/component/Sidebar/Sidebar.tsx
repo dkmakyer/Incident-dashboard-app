@@ -47,14 +47,11 @@ const Sidebar = () => {
                     label="Settings"
                     Icon={Settings}
                 />
-            </nav>
-
-            <div className="sidebar-footer">
                 <button className="logout-btn">
                     <LogOut size={20} />
                     <span>Logout</span>
                 </button>
-            </div>
+            </nav>
         </aside>
     );
 };
