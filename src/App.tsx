@@ -14,6 +14,11 @@ function App() {
           <Routes>
             <Route path="/" element={<IncidentListPage />} />
             <Route path="/incidents/:id" element={<IncidentDetailPage />} />
+
+            <Route path="/incidents" element={<IncidentListPage />} />
+            <Route path="/analytics" element={<div>Analytics</div>} />
+            <Route path="/tasks" element={<div>Tasks</div>} />
+            <Route path="/settings" element={<div>Settings</div>} />
           </Routes>
         </Layout>
       </IncidentProvider>

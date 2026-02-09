@@ -1,6 +1,7 @@
 import React from 'react';
 import type { ReactNode } from 'react';
 import './Layout.css';
+import Sidebar from '../Sidebar/SIdebar';
 
 interface LayoutProps {
     children: ReactNode;
@@ -9,15 +10,12 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div className="app-layout">
-            <nav className="top-nav">
-                <div className="nav-brand">Incident Command</div>
+            <nav className="sidebar-nav">
+                <Sidebar />
             </nav>
             <main className="main-content">
                 {children}
             </main>
-            <footer className="app-footer">
-                © 2024 Incident Command System
-            </footer>
         </div>
     );
 };
