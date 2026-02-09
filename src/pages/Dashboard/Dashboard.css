@@ -1,6 +1,5 @@
 .dashboard-container {
     padding: 2rem;
-    max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -21,7 +20,6 @@
 .stats-grid {
     display: flex;
     flex-direction: row;
-    width: 70vw;
     gap: 1.5rem;
     margin-bottom: 2rem;
 }
@@ -29,7 +27,6 @@
 .stat-card {
     background: white;
     border-radius: 12px;
-    width: 100%;
     padding: 1.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
