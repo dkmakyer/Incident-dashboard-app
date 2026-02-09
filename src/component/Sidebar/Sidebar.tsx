@@ -5,10 +5,10 @@ import {
     BarChart3,
     CheckSquare,
     Settings,
-    LogOut
+    LogOut,
 } from "lucide-react";
 
-import "./sidebar.css";
+import "./Sidebar.css";
 
 const Sidebar = () => {
     return (

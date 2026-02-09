@@ -23,7 +23,7 @@ export const useIncidentDetails = () => {
         }
     }, [id, incidents]);
 
-    const goBack = () => navigate('/');
+    const goBack = () => navigate('/incidents');
 
     return {
         incident,
