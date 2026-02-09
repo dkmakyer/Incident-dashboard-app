@@ -7,7 +7,6 @@ interface IncidentTimelineProps {
 }
 
 const IncidentTimeline: React.FC<IncidentTimelineProps> = ({ entries }) => {
-    // Sort entries by timestamp descending (newest first)
     const sortedEntries = useMemo(
         () => [...entries].sort((a, b) => b.timestamp - a.timestamp),
         [entries]

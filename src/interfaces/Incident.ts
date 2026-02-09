@@ -29,7 +29,6 @@ export interface TimelineEntry {
     type: 'status_change' | 'comment' | 'event';
     author: string;
     note: string;
-    // For status changes
     previousStatus?: string;
     newStatus?: string;
 }

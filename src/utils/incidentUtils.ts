@@ -30,11 +30,11 @@ export const filterIncidents = (
 
 export const getSeverityColor = (severity: string) => {
     switch (severity) {
-        case 'Critical': return '#dc3545'; // Red
-        case 'High': return '#fd7e14';     // Orange
-        case 'Medium': return '#ffc107';   // Yellow
-        case 'Low': return '#28a745';      // Green
-        default: return '#6c757d';         // Grey
+        case 'Critical': return '#dc3545';
+        case 'High': return '#fd7e14';
+        case 'Medium': return '#ffc107';
+        case 'Low': return '#28a745';
+        default: return '#6c757d';
     }
 };
 
